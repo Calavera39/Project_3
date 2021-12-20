@@ -1,0 +1,44 @@
+.footer
+    min-height: 630px
+    position: relative
+    &__info
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+        width: 460px
+        height: 270px
+        background: $main-color
+        padding: 50px 68px 60px 68px
+    &__adr
+        margin-bottom: 36px
+        font-weight: 500
+        font-size: 20px
+        line-height: 20px
+        text-align: center
+        color: #FFFFFF
+    &__phone
+        display: block
+        font-weight: bold
+        font-size: 20px
+        line-height: 20px
+        text-align: center
+        color: #FFFFFF
+        text-decoration-line: none
+        &:hover
+            color: #fff
+    &__social
+        margin: 0 auto
+        margin-top: 36px
+        width: 212px
+        height: 52px
+        display: flex
+        justify-content: space-between
+        
+    &__social-item
+        &:hover
+            webkit-transform: rotate(15deg) scale(1.4)
+            transform: rotate(15deg) scale(1.4)
+            -webkit-transition: .3s ease-in-out
+            transition: .3s ease-in-out
+       

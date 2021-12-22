@@ -15,8 +15,9 @@ $(document).ready(function(){
             }
             }
         ]
-      });
+});
 
+    
 
       $('ul.catalog__tabs').on('click', 'li:not(.catalog__tab_active)', function() {
         $(this)
@@ -53,134 +54,73 @@ $(document).ready(function(){
     });
 
    
-    });
+    
     $('.button_mini').each(function(i) {
         $(this).on('click', function() {
             $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text())
             $('.overlay, #order').fadeIn('slow');
         })
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* var name = "Ivan";
-let number = 7;
-const pi = 3.14;
-
-
-number = 4; */
-/* pi = 5;
-
-let leftBorderWidth = 200;  */
-
-// number - числа 
-// string - любая информация которую можно описать словами, нужны ковычки "" '' ``
-//  true/false 
-// null
-// undefined - существует но не имеет значения
-
-/* let obj =  {
-    name: 'apple',
-    color: 'green',
-    weight: 200
-} */
-
-// Symbol
-
-/* alert(1234) */
-
-/* console.log(number) */
-/* let answer = confirm("вам есть 19?");
-console.log(answer) */
-
-/* let answer = prompt("вам есть 19?", "");
-console.log(answer); */
-
-/* console.log(4 + 'fdd'); */
-
-/* let isChecked = false,
-    isClose = false;
-
-/* console.log(isChecked && isClose) */
-
-/* console.log(isChecked || isClose); */ 
-
-
-/* if (2*1 == 8*1) {
-    console.log('Верно')
-} else {
-    console.log('ошибка')
-} */
-
-/* let answer = confirm("есть ли вам 18?");
-if (answer) {
-    console.log('Go')
-} else {
-    console.log('Go away')
-} */
-
-/* const num = 50;
-
-if (num < 49) {
-    console.log('not correct')
-} else if (num > 100) {
-    console.log ('many')
-} else {
-    console.log('correct')
-} */
-
-/* for(let i = 1; i<8; i++) {
-    console.log(i);
-} */
-
-/* function logging(a, b) {
-    console.log( a + b )
-}
-
-/* logging(3, 5);
-
-logging(6, 8); */
-
+ 
+
+        function validateForms(form) {
+            $(form).validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    phone: "required",
+                    email: {
+                        required: true,
+                        email:true
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Пожалуйста, введите свое имя",
+                        minlength: jQuery.validator.format("Введите {0} символов!")
+                      },
+                    phone: "Пожалуйста, введите свой номер телефона",
+                    email: {
+                      required: "Пожалуйста, введите свой адрес почты",
+                      email: "Неправильный адрес почты"
+                    }
+                }
+            });
+        }
+        
+        validateForms('#consultation-form');
+        validateForms('#consultation form');
+        validateForms('#order form');
+
+        $('input[name=phone]').mask("+7 (999) 999-99-99");
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url: "mailer/smart.php",
+                data: $(this).serialize()
+            }).done(function() {
+                $(this).find("input").val("");
+                $('#consultation, #order').fadeOut();
+                $('.overlay, #thanks').fadeIn('slow');
+
+
+                $('form').trigger('reset');
+            });
+            return false;
+        });
+   
+     $(window).scroll(function() {
+         if ($(this).scrollTop() > 1600) {
+             $('.pageup').fadeIn();
+         } else {
+            $('.pageup').fadeOut();
+         }
+     });
+
+     new WOW().init();
+      
+});
